@@ -44,6 +44,7 @@ export default {
     z-index 1000
     box-sizing border-box
     padding 0 8px
+    transition: all .5s
     .logo, .users
       display flex
       align-items center

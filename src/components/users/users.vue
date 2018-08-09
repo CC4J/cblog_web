@@ -42,7 +42,7 @@ export default {
 <style lang="stylus" scoped>
 .users
   display flex
-  position absolute
+  position fixed
   top 0
   right 0
   width 260px

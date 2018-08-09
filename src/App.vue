@@ -5,9 +5,12 @@
       <users v-show="usersLock"></users>
     </transition>
     <!-- 页面内容 -->
-    <div class="wrapper" ref="wrapper">
+    <div class="wrapper">
       <!-- 头部 -->
-      <c-header @showUsers="toggleUsers"></c-header>
+      <c-header @showUsers="toggleUsers" ref="header"></c-header>
+      <div class="content" ref="content">
+        <router-view></router-view>
+      </div>
     </div>
     <!-- 遮罩层 -->
     <transition name="shade">
@@ -37,19 +40,26 @@ export default {
       // 显示右侧用户列表
       this.usersLock = true
       // 移动内容区域
-      var bodyElm = this.$refs.wrapper
-      bodyElm.style.transform = 'translateX(-260px)'
+      var bodyElm = this.$refs.content
+      bodyElm.style.marginLeft = '-260px'
+      // 移动头部
+      var headerElm = this.$refs.header.$el
+      headerElm.style.marginLeft = '-260px'
+
       // 显示遮罩层
       this.shadeLock = true
     },
     clickShade () { // 遮罩点击事件
-      // 隐藏这招
+      // 隐藏遮罩
       this.shadeLock = false
       // 隐藏用户列表
       this.usersLock = false
-      // 移动内容区域
-      var bodyElm = this.$refs.wrapper
-      bodyElm.style.transform = 'translateX(0px)'
+      // 还原内容区域
+      var bodyElm = this.$refs.content
+      bodyElm.style.marginLeft = '0px'
+      // 还原头部
+      var headerElm = this.$refs.header.$el
+      headerElm.style.marginLeft = '0px'
     }
   }
 }
@@ -79,18 +89,18 @@ export default {
 html, body
   width 100%
   height 100%
-  overflow hidden
   margin 0
   padding 0
+  background #f9f9f9
   #app
     width 100%
-    height 100%
     .wrapper
       background #f9f9f9
-      height 1000px
-      transition: all .5s
+      .content
+        padding-top 45px
+        transition: all .5s
     .shade
-      position absolute
+      position fixed
       top 0
       left -260px
       width 100%
