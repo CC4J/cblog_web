@@ -2,29 +2,31 @@
   <div class="home">
     <div class="home-content">
       <!-- 选项卡 -->
-      <div class="home-tabs">
-        <el-tabs v-model="activeTab" @tab-click="clickTabs">
-          <el-tab-pane label="热门推荐" name="hot">
-            <div v-for="(post, index) in 10" :key="index" class="home-post">
-              <post></post>
-            </div>
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="100">
-            </el-pagination>
-          </el-tab-pane>
-          <el-tab-pane label="最新发表" name="new">
-            <div v-for="(post, index) in 10" :key="index" class="home-post">
-              <post></post>
-            </div>
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :total="100">
-            </el-pagination>
-          </el-tab-pane>
-        </el-tabs>
+      <el-tabs v-model="activeTab" @tab-click="clickTabs">
+        <el-tab-pane label="热门推荐" name="hot">
+          <div v-for="(post, index) in 10" :key="index" class="home-post">
+            <post></post>
+          </div>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="100">
+          </el-pagination>
+        </el-tab-pane>
+        <el-tab-pane label="最新发表" name="new">
+          <div v-for="(post, index) in 10" :key="index" class="home-post">
+            <post></post>
+          </div>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="100">
+          </el-pagination>
+        </el-tab-pane>
+      </el-tabs>
+      <div class="home-newblog">
+        <span class="el-icon-edit-outline"></span>
+        <span>写博客</span>
       </div>
     </div>
     <div class="home-aside">
@@ -69,10 +71,20 @@ export default {
       display inline-block
       vertical-align top
     .home-content
+      position relative
       width 65%
       font-size 14px
       box-sizing border-box
       padding 15px 30px
+      .home-newblog
+        position absolute
+        font-size 16px
+        right 32px
+        top 24px
+        cursor pointer
+        color #666
+        &:hover
+          color #000
       .home-post
         margin-bottom 28px
       .el-tabs__header
