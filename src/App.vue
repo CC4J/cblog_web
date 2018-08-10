@@ -7,7 +7,7 @@
     <!-- 页面内容 -->
     <div class="wrapper">
       <!-- 头部 -->
-      <c-header @showUsers="toggleUsers" ref="header"></c-header>
+      <c-header @showUsers="toggleUsers" @login="handleLogin" ref="header"></c-header>
       <div class="content" ref="content">
         <router-view></router-view>
       </div>
@@ -60,6 +60,9 @@ export default {
       // 还原头部
       var headerElm = this.$refs.header.$el
       headerElm.style.marginLeft = '0px'
+    },
+    handleLogin () { // login事件
+      this.$router.push({path: '/login'})
     }
   }
 }

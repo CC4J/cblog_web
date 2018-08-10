@@ -6,7 +6,11 @@
       <el-input class="search" v-model="searchInput" placeholder="大家都在搜..."
       suffix-icon="el-icon-search"></el-input>
     </div>
-    <div class="users" @click="handleUser">
+    <div class="header-login" v-if="!isLogin">
+      <span @click="handleLogin" class="header-login-btn">登陆</span>
+      <span class="header-signup-btn">注册</span>
+    </div>
+    <div v-if="isLogin" class="users" @click="handleUser">
       <img :src="avatar">
       <span class="el-icon-caret-right"></span>
     </div>
@@ -20,12 +24,16 @@ export default {
   data () {
     return {
       avatar: avatarUrl,
-      searchInput: ''
+      searchInput: '',
+      isLogin: false
     }
   },
   methods: {
     handleUser () {
       this.$emit('showUsers')
+    },
+    handleLogin () {
+      this.$emit('login')
     }
   }
 }
@@ -45,7 +53,7 @@ export default {
     box-sizing border-box
     padding 0 8px
     transition: all .5s
-    .logo, .users
+    .logo, .users, .header-login
       display flex
       align-items center
       height 45px
@@ -74,4 +82,12 @@ export default {
       &:hover
         span
           color #eeeeee
+    .header-login
+      color rgba(255,255,255,.7)
+      .header-login-btn, .header-signup-btn
+        margin-right 10px
+        cursor pointer
+        font-size 14px
+        &:hover
+          color #ffffff
 </style>
